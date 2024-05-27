@@ -1,39 +1,48 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shark</title>
-    <link rel="stylesheet" href="/static/CSS/reset.css" />
-    <link rel="stylesheet" href="/static/CSS/base.css" />
-  </head>
-  <body>
+    <link rel="stylesheet" href="/static/CSS/reset.css">
+    <link rel="stylesheet" href="/static/CSS/base.css">
+    <style>
+    </style>
+</head>
+<body>
     {% include 'header.html' %}
-
     <div class="contact">
-      <div class="cardnew">
-        <h2>我們的新品：</h2>
-        <div class="menu">
-          <!-- imgage 是要連圖片的 -->
-          
-          <div class="imgage"></div>
-          <div class="imgage"></div>
-          <div class="imgage"></div>
-          <div class="imgage"></div>
+        <div class="cardnew">
+            <h2>我們的新品：</h2>
+            <div class="menu" >
+                <div class="imgage-1"> 
+                    <a href="/menu/63">
+                        <img src="/menuPhotoUpload/image/三彩團子.png" alt="三彩團子" width="500" height="500">
+                    </a>
+                </div>
+                <div class="imgage-2">
+                    <a href="/menu/47">
+                        <img src="/menuPhotoUpload/image/黃金蟹.png" alt="黃金蟹" width="500" height="500">
+                    </a>
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="cardrecommend">
-        <h2>為您推薦：</h2>
-        <div class="menu">
-          <!-- imgage 是要連圖片的 -->
-          <div class="imgage"></div>
-          <div class="imgage"></div>
-          <div class="imgage"></div>
-          <div class="imgage"></div>
+        <div class="cardrecommend">
+            <h2>為您推薦：</h2>
+            <div class="menu">
+                <div class="imgage-3">
+                    <a href="/menu/27">
+                        <img src="/menuPhotoUpload/image/勝利豬排飯.png" alt="勝利豬排飯" width="500" height="500">
+                    </a>
+                </div>
+                <div class="imgage-4">
+                    <a href="/menu/37">
+                        <img src="/menuPhotoUpload/image/乾燒香魚.png" alt="乾燒香魚" width="500" height="500">
+                    </a>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-
     {% include 'footer.html' %}
-  </body>
+</body>
 </html>
