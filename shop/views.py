@@ -18,6 +18,7 @@ def menuAdd(request):
             form.save()
             form=MenuForm()
             msg="新增成功"
+            return redirect('menuAll')
     return render(request,'menuAdd.html', locals())
 
 @login_required

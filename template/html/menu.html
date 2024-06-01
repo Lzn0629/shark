@@ -51,41 +51,46 @@
 
       .things1 {
           background-color: rgba(173, 189, 232, 0.85);
-          padding: 20px;
+          padding: 20px 80px;
           border-radius: 10px;
           margin-top: 60px;
+          display: flex;
+          justify-content: space-between;
       }
 
       .menu-dishname1 {
           font-size: 36px;
           font-weight: bold;
           color: #333;
-          margin-bottom: 10px;
+          margin-bottom: 15px;
       }
 
-      .menu-dishprice1 {
-          font-size: 24px;
-          color: #555;
-          margin-bottom: 10px;
+      .menu-v{
+        font-size: 28px;
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 25px;
       }
 
+      .menu-text{
+        max-width: 40%;
+        margin-top: 2%;
+      }
+
+      .menu-dishprice1,
       .menu-dishclassification1,
       .menu-dishIngredients1,
-      .menu-introduction {
-          font-size: 18px;
-          color: #555;
-          margin-bottom: 10px;
-      }
-
+      .menu-introduction,
       .menu-dishIngredients1 {
-          font-size: 20px;
-          font-weight: bold;
+          font-size: 24px;
+          color: #555;
+          margin-bottom: 15px;
       }
 
       p {
-          margin: 10px 0;
+          margin: 15px 0;
           color: #555;
-          font-size: 18px;
+          font-size: 24px;
       }
 
       .recommenddish {
@@ -99,6 +104,26 @@
       .recommenddish:hover {
           text-decoration: underline;
       }
+      .recommend-ul{
+        display: flex;
+        text-align: center;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+        font-weight: bold;
+      }
+      .recommend-ul li{
+        margin: 20px 40px;
+      }
+      .recommend-ul li:hover{
+        background-color: rgba(173, 189, 232, 0.85);
+      }
+      hr {
+            border: none;
+            height: 2px;
+            background-color: #000;
+            margin: 20px 0; 
+        }
     </style>
   </head>
   <body>
@@ -106,26 +131,32 @@
     <div class="acard1">
       <a class="btnBack1" onclick="history.back();">返回</a>
       <div class="things1">
-        <img src="{{ menu.image.url }}" alt="{{ m.name }}" width="300" height="300">
-        <div>
-          <h1 class="menu-dishname1">{{ menu.name }}</h1>
-          <p class="menu-dishprice1">{{ menu.price }}</p>
+        <img src="{{ menu.image.url }}" alt="{{ m.name }}" style="height: 350px;">
+        <div class="menu-text">
+          <h1 class="menu-dishname1">{{ menu.name }}</h1>   
+          <p class="menu-v">{{ menu.isVegetarian }}</p>
+          <p class="menu-dishprice1">$ {{ menu.price }}</p>
           <p class="menu-dishclassification1">{{ menu.classification }}</p>
-          <p class="menu-dishIngredients1">{{ menu.allergy }}</p>
+          <p class="menu-dishIngredients1">成分：{{ menu.allergy }}</p>
+          <hr>
           <p class="menu-introduction">{{ menu.introduce }}</p>
         </div>
       </div>
-      <p>{{ menu.isVegetarian }}</p>
+      
     </div>
     <div>
       {% if recommendation %}
-      <ul>
+      <div class="acard1" style="margin-top: 50px;">
+        <h1 style="font-size: 36px;">為您推薦</h1>
+        <ul class="recommend-ul">
         {% for r in recommendation %}
         <li>
-          <a href="/menu/{{ r.id }}" class="recommenddish">{{ r.name }}</a>
+          <a href="/menu/{{ r.id }}" class="recommenddish"><img src="{{ r.image.url }}" style="max-width: 70%; min-width: 200px;"></a>
+          <p>{{ r.name }}</p>
         </li>
         {% endfor %}
       </ul>
+      </div>
       {% endif %}
     </div>
   </body>

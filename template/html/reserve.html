@@ -115,7 +115,7 @@
                             <td>{{ r.time }}</td>
                             <td>{{ r.numberOfPeople }}</td>
                             <td>{{ r.note }}</td>
-                            <td>已到</td>
+                            <td>{% if r.isCome %}已到{% else %}未到{% endif %}</td>
                         </tr>
                         {% endfor %}
                     {% else %}

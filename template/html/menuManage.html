@@ -52,7 +52,7 @@
           {% if menuList %} {% for m in menuList %}
           <div class="card2">
             <a class="editmenu" href="/menu/{{ m.id }}">編輯</a>
-            <img class="Genshin2" src="/static/img/原神_國際版.jpeg" alt="" />
+            <img class="Genshin2" src="{{ m.image.url }}" alt="" />
             <div>
               <p class="object2 dishName2" href="/menu/{{ m.id }}">
                 {{ m.name }}

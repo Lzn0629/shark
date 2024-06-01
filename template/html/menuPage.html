@@ -35,9 +35,11 @@
         <div class="someMenu1">
           {% if menuList %} {% for m in menuList %}
           <div class="card1">
-            <img src="{{ m.image.url }}" alt="{{ m.name }}" width="300" height="200">
-            <p class="dishName1"><a href="/menu/{{ m.id }}">{{ m.name }}</a></p>
-            <p class="dishPrice1">$ {{ m.price }}</p>
+            <a href="/menu/{{ m.id }}" style="text-decoration: none;">
+              <img src="{{ m.image.url }}" alt="{{ m.name }}" width="300" height="200">
+              <p class="dish-text">{{ m.name }}</p>
+              <p class="dish-text">$ {{ m.price }}</p>
+            </a>
           </div>
           {% endfor %} {% else %}
           <p>無</p>

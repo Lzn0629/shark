@@ -5,124 +5,149 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>經理介面</title>
 </head>
+<style>
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+a {
+    text-decoration: none;
+    color: black;
+}
+.reserve {
+    margin: 20px;
+}
+.acard1 {
+          width: 70%;
+          margin: 20px auto;
+          padding: 20px;
+          background-color: rgba(255, 255, 255, 0.85);
+          border-radius: 10px;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+          position: relative;
+          background-image: url('/path/to/your/background-image.jpg');
+          background-size: cover;
+          background-repeat: no-repeat;
+          margin-bottom: 100px;
+      }
+table td {
+    font-size: 24px;
+    padding-right: 80px;
+    padding-top: 10px;
+}
+</style>
 {% include 'header.html' %}
-<body>
-    <div style="flex: auto;">
-        {% for t in timeList %}
-        <a href="/timeModify/{{ t.id }}">{{ t }}</a>
-        {% endfor %}
-
-        {% if reserveNoon %}
-        <table>
-            {% for r in reserveNoon %}
-            <tr>
-                <td>{{ r.customer.first_name }}
-                    {% if r.customer.sex.id == 3 %}
-                    先生/小姐
-                    {% else %}
-                    {{ r.customer.sex }}
-                    {% endif %}
-                </td>
-                <td>{{ r.customer.phoneLastThree }}</td>
-                <td>{{ r.numberOfPeople }}人</td>
-                <td>{{ r.time }}</td>
-                <td>{% if alternate %}候補{% endif %}</td>
-                <td>{% if r.isCome %}
-                    已入場
-                    {% else %}
-                    <a href="reserveIsCome/{{ r.id }}">入場</a>
-                    {% endif %}
-                </td>
-            </tr>
-            {% endfor %}
-        </table>
-        {% else %}
-            <p>無</p>
-        {% endif %}
-
-        {% if reserveAfternoon %}
-        <table>
-            {% for r in reserveAfternoon %}
-            <tr>
-                <td>{{ r.customer.first_name }}
-                    {% if r.customer.sex.id == 3 %}
-                    先生/小姐
-                    {% else %}
-                    {{ r.customer.sex }}
-                    {% endif %}
-                </td>
-                <td>{{ r.customer.phoneLastThree }}</td>
-                <td>{{ r.numberOfPeople }}人</td>
-                <td>{{ r.time }}</td>
-                <td>{% if alternate %}候補{% endif %}</td>
-                <td>{% if r.isCome %}
-                    已入場
-                    {% else %}
-                    <a href="reserveIsCome/{{ r.id }}">入場</a>
-                    {% endif %}
-                </td>
-            </tr>
-            {% endfor %}
-        </table>
-        {% else %}
-            <p>無</p>
-        {% endif %}
-
-        {% if reserveEvening %}
-        <table>
-            {% for r in reserveEvening %}
-            <tr>
-                <td>{{ r.customer.first_name }}
-                    {% if r.customer.sex.id == 3 %}
-                    先生/小姐
-                    {% else %}
-                    {{ r.customer.sex }}
-                    {% endif %}
-                </td>
-                <td>{{ r.customer.phoneLastThree }}</td>
-                <td>{{ r.numberOfPeople }}人</td>
-                <td>{{ r.time }}</td>
-                <td>{% if alternate %}候補{% endif %}</td>
-                <td>{% if r.isCome %}
-                    已入場
-                    {% else %}
-                    <a href="reserveIsCome/{{ r.id }}">入場</a>
-                    {% endif %}
-                </td>
-            </tr>
-            {% endfor %}
-        </table>
-        {% else %}
-            <p>無</p>
-        {% endif %}
-
-        {% if reserveNight %}
-        <table>
-            {% for r in reserveNight %}
-            <tr>
-                <td>{{ r.customer.first_name }}
-                    {% if r.customer.sex.id == 3 %}
-                    先生/小姐
-                    {% else %}
-                    {{ r.customer.sex }}
-                    {% endif %}
-                </td>
-                <td>{{ r.customer.phoneLastThree }}</td>
-                <td>{{ r.numberOfPeople }}人</td>
-                <td>{{ r.time }}</td>
-                <td>{% if alternate %}候補{% endif %}</td>
-                <td>{% if r.isCome %}
-                    已入場
-                    {% else %}
-                    <a href="reserveIsCome/{{ r.id }}">入場</a>
-                    {% endif %}
-                </td>
-            </tr>
-            {% endfor %}
-        </table>
-        {% else %}
-            <p>無</p>
-        {% endif %}
-    </div>
+<body style="margin-top: 200px;">
+    {% for t in timeList %}
+        <div class="acard1">
+            <a href="/timeModify/{{ t.id }}"><p style="font-size: 24px; font-weight: bold;">{{ t }}</p></a>
+            <table class="reserve">
+                <tr>
+                    <td class="name">稱呼</td>
+                    <td class="phone">手機末三碼</td>
+                    <td class="count">人數</td>
+                    <td class="note">備註</td>
+                </tr>
+                {% if t.id == 1 %}
+                    {% if reserveNoon %}
+                        {% for r in reserveNoon %}
+                        <tr>
+                            <td class="name">{{ r.customer.first_name }}
+                                {% if r.customer.sex.id == 3 %}
+                                先生/小姐
+                                {% else %}
+                                {{ r.customer.sex }}
+                                {% endif %}
+                            </td>
+                            <td class="phone">{{ r.customer.phoneLastThree }}</td>
+                            <td class="count">{{ r.numberOfPeople }}人</td>
+                            <td class="note">{{ r.note }}</td>
+                            <td class="alternate">{% if alternate %}候補{% endif %}</td>
+                            <td class="come">{% if r.isCome %}
+                                已入場
+                                {% else %}
+                                <a href="reserveIsCome/{{ r.id }}">入場</a>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    {% else %}<tr><td>無</td></tr>{% endif %}
+                {% elif t.id == 2 %}
+                    {% if reserveAfternoon %}
+                        {% for r in reserveAfternoon %}
+                        <tr>
+                            <td class="name">{{ r.customer.first_name }}
+                                {% if r.customer.sex.id == 3 %}
+                                先生/小姐
+                                {% else %}
+                                {{ r.customer.sex }}
+                                {% endif %}
+                            </td>
+                            <td class="phone">{{ r.customer.phoneLastThree }}</td>
+                            <td class="count">{{ r.numberOfPeople }}人</td>
+                            <td class="note">{{ r.note }}</td>
+                            <td class="alternate">{% if alternate %}候補{% endif %}</td>
+                            <td class="come">{% if r.isCome %}
+                                已入場
+                                {% else %}
+                                <a href="reserveIsCome/{{ r.id }}">入場</a>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    {% else %}<tr><td>無</td></tr>{% endif %}
+                {% elif t.id == 3 %}
+                    {% if reserveEvening %}
+                        {% for r in reserveEvening %}
+                        <tr>
+                            <td class="name">{{ r.customer.first_name }}
+                                {% if r.customer.sex.id == 3 %}
+                                先生/小姐
+                                {% else %}
+                                {{ r.customer.sex }}
+                                {% endif %}
+                            </td>
+                            <td class="phone">{{ r.customer.phoneLastThree }}</td>
+                            <td class="count">{{ r.numberOfPeople }}人</td>
+                            <td class="note">{{ r.note }}</td>
+                            <td class="alternate">{% if alternate %}候補{% endif %}</td>
+                            <td class="come">{% if r.isCome %}
+                                已入場
+                                {% else %}
+                                <a href="reserveIsCome/{{ r.id }}">入場</a>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    {% else %}<tr><td>無</td></tr>{% endif %} 
+                {% else %}
+                    {% if reserveNight %}
+                        {% for r in reserveNight %}
+                        <tr>
+                            <td class="name">{{ r.customer.first_name }}
+                                {% if r.customer.sex.id == 3 %}
+                                先生/小姐
+                                {% else %}
+                                {{ r.customer.sex }}
+                                {% endif %}
+                            </td>
+                            <td class="phone">{{ r.customer.phoneLastThree }}</td>
+                            <td class="count">{{ r.numberOfPeople }}人</td>
+                            <td class="note">{{ r.note }}</td>
+                            <td class="alternate">{% if alternate %}候補{% endif %}</td>
+                            <td class="come">{% if r.isCome %}
+                                已入場
+                                {% else %}
+                                <a href="reserveIsCome/{{ r.id }}">入場</a>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    {% else %}<tr><td>無</td></tr>{% endif %}
+                {% endif %}
+            </table>
+        </div>
+    {% endfor %}
 </body>
 </html>

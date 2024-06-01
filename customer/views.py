@@ -119,15 +119,13 @@ def userModify(request):
 def menuAll(request):
     classificationAll=Classification.objects.all()
     searchState=request.GET.get('state')
-    print(searchState)
-
     if request.user.is_superuser:
         if searchState == "on":
             menuList=Menu.objects.filter(listingDate__lte=timezone.now(), isSale=True).order_by('isSale','listingDate','price')
         elif searchState == "off":
             menuList=Menu.objects.filter(listingDate__lte=timezone.now(), isSale=False).order_by('isSale','listingDate','price')
         else:
-            menuList=Menu.objects.all().order_by('-isSale','listingDate','price')
+            menuList=Menu.objects.all().order_by('-isSale','-listingDate','price')
         return render(request, 'menuManage.html', locals())
     menuList=Menu.objects.filter(listingDate__lte=timezone.now(), isSale=True).order_by('isSale','listingDate','price')
     return render(request, 'menuPage.html', locals())
@@ -173,9 +171,8 @@ def menuByClassification(request, classification_id):
     return redirect('/')
 
 def comment(request):
-    comments = Comment.objects.all()  # 查詢所有資料
+    comments = Comment.objects.all().order_by('-uploadTime')  # 查詢所有資料
     if request.user.is_superuser:
-        comments=Comment.objects.all().order_by('uploadTime')
         return render(request, 'readComment.html', locals())
     if request.method == "POST":
         if request.user.is_active:

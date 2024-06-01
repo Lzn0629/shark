@@ -6,25 +6,61 @@
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <title>Surf Shark</title>
 </head>
+<style>
+    a {
+        text-decoration: none;
+    }
+    .menu-name{
+        font-size: 32px;
+        text-align: center;
+        margin: 25px;
+    }
+    .cardnew{
+        margin: 100px 0;
+
+    }
+    .cardrecommend{
+        margin-bottom: 70px;
+    }
+</style>
 
 {% extends 'base.html' %}
 <body>
     {% block content %}
-    <h1>這是我們的新品喔~</h1>
-    {% include 'menu.html' %}
-    <div class="additional-content">
-        <h2>為您推薦</h2>
-        <p>Stay tuned for our latest updates and promotions!</p>
+    <div class="contact">
+        <div class="cardnew">
+            <h2>我們的新品：</h2>
+            <div class="menu" >
+                {% if new %}
+                {% for m in new %}
+                <div class="imgage-1"> 
+                    <a href="/menu/{{ m.id }}">
+                        <img src="{{ m.image.url }}" alt="{{ m.name }}"height="300">
+                        <p class="menu-name">{{ m.name }}</p>
+                    </a>
+                </div>
+                {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+        <div class="cardrecommend">
+            <h2>為您推薦：</h2>
+            <div class="menu" >
+                {% if recommendation %}
+                {% for m in recommendation %}
+                <div class="imgage-1"> 
+                    <a href="/menu/{{ m.id }}">
+                        <img src="{{ m.image.url }}" alt="{{ m.name }}" height="300">
+                        <p class="menu-name">{{ m.name }}</p>
+                
+                    </a>
+                </div>
+                {% endfor %}
+                {% endif %}
+            </div>
+        </div>
     </div>
 {% endblock %}
-</body>
-
-<body>
-    {% if recommendation %}
-        {% for r in recommendation %}
-        <td><a href="/menu/{{ r.id }}">{{ r.name }}</a></td>
-        {% endfor %}
-    {% endif %}
 </body>
 
 </html>

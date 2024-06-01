@@ -62,6 +62,6 @@ class Reserve(models.Model):
     numberOfPeople=models.IntegerField()
     date=models.DateField()
     time=models.ForeignKey(Time, on_delete=models.CASCADE)
-    note=models.TextField(null=True)
+    note=models.TextField(null=True, max_length=20)
     alternate=models.BooleanField(default=False)
     isCome=models.BooleanField(default=False)
