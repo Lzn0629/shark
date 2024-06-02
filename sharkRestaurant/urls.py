@@ -54,10 +54,5 @@ urlpatterns = [
     path('reserveIsCome/<int:reserve_id>', reserveIsCome, name='reserveIsCome'), #訂位到場
     path('reserveSearch/', reserveSearch, name='reserveSearch'), #以日期時段查找訂位
     path('timeModify/<int:time_id>',timeModify, name='timeModify'), #時段管理
-    path('classificationManage/', classificationManage, name='classificationManage'),  #分類管理
-    path('classificationManage/<str:msg>', classificationManage, name='classificationManageMsg'),   #分類管理帶msg
-    path('classificationModify/<int:classification_id>', classificationModify, name='classificationModify'),#分類更新
-    path('classificationAdd/', classificationAdd, name='classificationAdd'),#分類新增
-    path('classificationDelete/<int:classification_id>', classificationDelete, name='classificationDelete'),#分類刪除
     
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) #圖片上傳後顯示鏈接

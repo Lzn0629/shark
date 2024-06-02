@@ -229,7 +229,7 @@ def reserveAll(request):
             form=ReserveSearchForm()
             reserve=Reserve.objects.filter(date__range=[datetime.now().date(), datetime.now().date() + timedelta(days=6)]).order_by('date')
             return render(request, 'reserveManage.html', locals())
-        reserve=Reserve.objects.filter(customer=request.user).order_by('date')
+        reserve=Reserve.objects.filter(customer=request.user).order_by('-date')
         return render(request, 'reserve.html', locals())
     msg='尚未登入不可查看訂位，請先登入'
     return render(request, 'error.html', locals())

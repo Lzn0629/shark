@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 from customer.models import Sex, User, Classification, Vegetarian, Menu, Comment, Time, Reserve
 from datetime import timedelta
 from customer.forms import *
+from django.forms import formset_factory
 from django.urls import reverse
 
 @login_required
@@ -54,14 +55,6 @@ def reserveIsCome(request, reserve_id):
         reserve.save()
     return redirect('home')
 
-# @login_required
-# def reserveDelete(request, reserve_id):
-#     if request.user.is_superuser and Reserve.objects.filter(id=reserve_id).exists():
-#         reserve=Reserve.objects.get(id=reserve_id)
-#         reserve.delete()
-#         return redirect('reserveAll')
-#     return redirect('home')
-
 @login_required
 def reserveSearch(request):
     if request.user.is_superuser:
@@ -88,11 +81,11 @@ def reserveSearch(request):
 def timeModify(request, time_id):
     if request.user.is_superuser and Time.objects.filter(id=time_id).exists():
         time=Time.objects.get(id=time_id)
-        form=TimeForm(instance=time)
-        if request.method=='POST':
-            form=TimeForm(request.POST, instance=time)
+        form = TimeForm(instance=time)
+        if request.method == 'POST':
+            form = TimeForm(request.POST, request.FILES, instance=time)
             if form.is_valid():
                 form.save()
-                msg='更改成功'
+                msg = '更改成功'
         return render(request, 'timeModify.html', locals())
     return redirect('home')

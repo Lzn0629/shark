@@ -56,19 +56,12 @@
             padding-top: 1em;
         }
 
-        th:nth-child(2), td:nth-child(2) {
-            font-size: 1.5em; 
-        }
-
-        th:nth-child(3), td:nth-child(3) {
-            font-size: 1.5em; 
-        }
-
-        th:nth-child(4), td:nth-child(4) {
-            font-size: 1.5em; 
-        }
-
-        th:nth-child(5), td:nth-child(5) {
+        th:nth-child(2), td:nth-child(2),
+        th:nth-child(3), td:nth-child(3),
+        th:nth-child(4), td:nth-child(4),
+        th:nth-child(5), td:nth-child(5),
+        th:nth-child(6), td:nth-child(6),
+        th:nth-child(7), td:nth-child(7){
             font-size: 1.5em; 
         }
                    
@@ -129,6 +122,8 @@
                         <th>訂位日期</th>
                         <th>訂位時段</th>
                         <th>訂位人數</th>
+                        <th>手機末三碼</th>
+                        <th>訂位人姓名</th>
                         <th>備註</th>
                         <th>訂位狀態</th>
                     </tr>
@@ -140,8 +135,15 @@
                             <td>{{ r.date }}</td>
                             <td>{{ r.time }}</td>
                             <td>{{ r.numberOfPeople }}</td>
+                            <td>{{ r.customer.phoneLastThree }}</td>
+                            <td>{{ r.customer.first_name }}
+                                {% if r.customer.sex.id == 3 %}
+                                先生/小姐
+                                {% else %}
+                                {{ r.customer.sex }}
+                                {% endif %}</td>
                             <td>{{ r.note }}</td>
-                            <td>已到</td>
+                            <td>{% if r.isCome %}已到{% else %}未到{% endif %}</td>
                         </tr>
                         {% endfor %}
                     {% else %}
