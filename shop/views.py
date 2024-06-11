@@ -65,13 +65,13 @@ def reserveSearch(request):
                 time = form.cleaned_data.get('time')
                 date = form.cleaned_data.get('date')
                 if time and date:
-                    reserve = Reserve.objects.filter(date__range=[datetime.now().date(), datetime.now().date() + timedelta(days=6)], time=time, date=date)
+                    reserve = Reserve.objects.filter(time=time, date=date)
                 elif time:
-                    reserve = Reserve.objects.filter(date__range=[datetime.now().date(), datetime.now().date() + timedelta(days=6)], time=time)
+                    reserve = Reserve.objects.filter(time=time)
                 elif date:
-                    reserve = Reserve.objects.filter(date__range=[datetime.now().date(), datetime.now().date() + timedelta(days=6)], date=date)
+                    reserve = Reserve.objects.filter(date=date)
                 else:
-                    reserve = Reserve.objects.filter(date__range=[datetime.now().date(), datetime.now().date() + timedelta(days=6)])
+                    reserve = Reserve.objects.all()
             return render(request, 'reserveManage.html', locals())
         form = ReserveSearchForm()
         return render(request, 'reserveManage.html', locals())
